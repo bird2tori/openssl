@@ -275,8 +275,11 @@ $code .= <<___;
 .globl	ossl_hwsm3_block_data_order
 .type ossl_hwsm3_block_data_order,\@abi-omnipotent
 ossl_hwsm3_block_data_order:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size   ossl_hwsm3_block_data_order, .-ossl_hwsm3_block_data_order
 ___
 } # avx2_sm3_ni

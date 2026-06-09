@@ -2889,8 +2889,11 @@ ___
     .globl  aesni_xts_avx512_eligible
     .type   aesni_xts_avx512_eligible,\@abi-omnipotent
     aesni_xts_avx512_eligible:
+    .cfi_startproc
+    .cfi_endprolog
     xor	%eax,%eax
     ret
+    .cfi_endproc
     .size   aesni_xts_avx512_eligible, .-aesni_xts_avx512_eligible
 
 ___

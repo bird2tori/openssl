@@ -852,8 +852,11 @@ $code.=<<___;
 .globl  ossl_rsaz_avxifma_eligible
 .type   ossl_rsaz_avxifma_eligible,\@abi-omnipotent
 ossl_rsaz_avxifma_eligible:
+.cfi_startproc
+.cfi_endprolog
     xor     %eax,%eax
     ret
+.cfi_endproc
 .size   ossl_rsaz_avxifma_eligible, .-ossl_rsaz_avxifma_eligible
 
 .globl  ossl_rsaz_amm52x20_x1_avxifma256
@@ -863,8 +866,11 @@ ossl_rsaz_avxifma_eligible:
 ossl_rsaz_amm52x20_x1_avxifma256:
 ossl_rsaz_amm52x20_x2_avxifma256:
 ossl_extract_multiplier_2x20_win5_avx:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size   ossl_rsaz_amm52x20_x1_avxifma256, .-ossl_rsaz_amm52x20_x1_avxifma256
 ___
 }}}

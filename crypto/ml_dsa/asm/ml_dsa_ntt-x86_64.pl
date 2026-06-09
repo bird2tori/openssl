@@ -1907,8 +1907,11 @@ $code .= <<___;
 .globl  ml_dsa_ntt_avx2_capable
 .type   ml_dsa_ntt_avx2_capable,\@abi-omnipotent
 ml_dsa_ntt_avx2_capable:
+.cfi_startproc
+.cfi_endprolog
     xor     %eax, %eax
     ret
+.cfi_endproc
 .size   ml_dsa_ntt_avx2_capable, .-ml_dsa_ntt_avx2_capable
 
 .globl  ml_dsa_poly_ntt_mult_avx2
@@ -1918,8 +1921,11 @@ ml_dsa_ntt_avx2_capable:
 ml_dsa_poly_ntt_mult_avx2:
 ml_dsa_poly_ntt_avx2:
 ml_dsa_poly_ntt_inverse_avx2:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b       # ud2
     ret
+.cfi_endproc
 .size   ml_dsa_poly_ntt_mult_avx2, .-ml_dsa_poly_ntt_mult_avx2
 ___
 }}}

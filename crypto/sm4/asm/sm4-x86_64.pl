@@ -248,22 +248,31 @@ $code .= <<___;
 .globl    ${prefix}_set_key
 .type     ${prefix}_set_key,\@abi-omnipotent
 ${prefix}_set_key:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size     ${prefix}_set_key, .-${prefix}_set_key
 
 .globl    ${prefix}_encrypt
 .type ${prefix}_encrypt,\@abi-omnipotent
 ${prefix}_encrypt:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size   ${prefix}_encrypt, .-${prefix}_encrypt
 
 .globl    ${prefix}_decrypt
 .type     ${prefix}_decrypt,\@abi-omnipotent
 ${prefix}_decrypt:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size     ${prefix}_decrypt, .-${prefix}_decrypt
 ___
 } # avx2_sm4_ni

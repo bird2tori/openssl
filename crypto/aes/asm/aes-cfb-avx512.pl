@@ -1033,8 +1033,11 @@ ossl_aes_cfb128_vaes_dec:
 .globl     ossl_aes_cfb128_vaes_eligible
 .type      ossl_aes_cfb128_vaes_eligible,\@abi-omnipotent
 ossl_aes_cfb128_vaes_eligible:
+.cfi_startproc
+.cfi_endprolog
     xor %eax,%eax
     ret
+.cfi_endproc
 .size ossl_aes_cfb128_vaes_eligible, .-ossl_aes_cfb128_vaes_eligible
 ___
 }

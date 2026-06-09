@@ -1076,8 +1076,11 @@ $code.=<<___;
 ossl_rsaz_amm52x40_x1_avxifma256:
 ossl_rsaz_amm52x40_x2_avxifma256:
 ossl_extract_multiplier_2x40_win5_avx:
+.cfi_startproc
+.cfi_endprolog
     .byte   0x0f,0x0b    # ud2
     ret
+.cfi_endproc
 .size   ossl_rsaz_amm52x40_x1_avxifma256, .-ossl_rsaz_amm52x40_x1_avxifma256
 ___
 }}}
