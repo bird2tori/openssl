@@ -573,7 +573,7 @@ my %globals;
 	    die "unexpected cfi state for proc label: $cfi_state" if (defined($cfi_state));
             $cfi_state = 'prologue'; # indicate that we've already emitted SEH64_PROC_FRAME.
             my $func = "SEH64_PROC_FRAME $current_function->{name},$current_function->{scope}\n";
-	    $func .= "	db 	0xf3,0x0f,0x1e,0xfa ; endbr\n" if (defined($current_function->{endbr}));
+	    $func .= "	db 	0f3h,0fh,1eh,0fah ; endbr\n" if (defined($current_function->{endbr}));
 	    $func .= "	mov	QWORD$PTR\[8+rsp\],rdi\t;WIN64 prologue\n";
 	    $func .= "SEH64_SAVEREG rdi, 8\n";
 	    $func .= "	mov	QWORD$PTR\[16+rsp\],rsi\n";
@@ -590,9 +590,9 @@ my %globals;
 	    $func .= "\n";
 	} else {
 	    die "unexpected cfi state for proc label: $cfi_state" if (defined($cfi_state));
-	    $cfi_state = 'prologue'; # indicate that we've already emitted PROC_FRAME.
+	    $cfi_state = 'prologue'; # indicate that we've already emitted SEH64_PROC_FRAME.
 	    my $func = "SEH64_PROC_FRAME $current_function->{name},$current_function->{scope}\n";
-	    $func .= "	db	0xf3,0x0f,0x1e,0xfa ; endbr\n" if (defined($current_function->{endbr}));
+	    $func .= "	db	0f3h,0fh,1eh,0fah ; endbr\n" if (defined($current_function->{endbr}));
 	    $func;
 	}
     }
@@ -1277,11 +1277,8 @@ my %globals;
 				  };
 		/\.size/    && do { if (defined($current_function)) {
 					undef $self->{value};
-					if ($current_function->{abi} eq "svr4") {
-					    $self->{value}="${decor}SEH_end_$current_function->{name}:";
-					    $self->{value}.=":\n" if($masm);
-					}
-					$self->{value}.="$current_function->{name}\tENDP" if($masm && $current_function->{name} && $cfi_state ne 'endproc');
+					die "Missing .cfi_endprolog and .cfi_endproc: $current_function->{name}" if ($cfi_state eq 'prologue');
+					die "Missing .cfi_endproc: $current_function->{name}" if ($cfi_state eq 'body');
 					undef $current_function;
 					undef $cfi_state;
 				    }
