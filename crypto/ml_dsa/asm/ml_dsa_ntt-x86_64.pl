@@ -99,11 +99,14 @@ $code .= <<___;
 .type   ml_dsa_ntt_avx2_capable,\@abi-omnipotent
 .align 32
 ml_dsa_ntt_avx2_capable:
+.cfi_startproc
+.cfi_endprolog
     mov     OPENSSL_ia32cap_P+8(%rip), %rcx
     xor     %eax, %eax
     and     \$$avx2_mask, %ecx
     cmovnz  %ecx, %eax
     ret
+.cfi_endproc
 .size   ml_dsa_ntt_avx2_capable, .-ml_dsa_ntt_avx2_capable
 ___
 

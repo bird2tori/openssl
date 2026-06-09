@@ -66,12 +66,15 @@ $code.=<<___;
 .type   ossl_rsaz_avxifma_eligible,\@abi-omnipotent
 .align  32
 ossl_rsaz_avxifma_eligible:
+.cfi_startproc
+.cfi_endprolog
     mov OPENSSL_ia32cap_P+20(%rip), %ecx
     xor %eax,%eax
     and \$`1<<23`, %ecx     # avxifma
     cmp \$`1<<23`, %ecx
     cmove %ecx,%eax
     ret
+.cfi_endproc
 .size   ossl_rsaz_avxifma_eligible, .-ossl_rsaz_avxifma_eligible
 ___
 
