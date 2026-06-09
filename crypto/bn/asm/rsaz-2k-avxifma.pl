@@ -352,7 +352,7 @@ $code.=<<___;
 .text
 
 .globl  ossl_rsaz_amm52x20_x1_avxifma256
-.type   ossl_rsaz_amm52x20_x1_avxifma256,\@function,5
+.type   ossl_rsaz_amm52x20_x1_avxifma256,\@function,5,endbranch
 .align 32
 ossl_rsaz_amm52x20_x1_avxifma256:
 .cfi_startproc
@@ -581,7 +581,7 @@ $code.=<<___;
 .text
 
 .globl  ossl_rsaz_amm52x20_x2_avxifma256
-.type   ossl_rsaz_amm52x20_x2_avxifma256,\@function,5
+.type   ossl_rsaz_amm52x20_x2_avxifma256,\@function,5,endbranch
 .align 32
 ossl_rsaz_amm52x20_x2_avxifma256:
 .cfi_startproc
@@ -742,7 +742,7 @@ $code.=<<___;
 
 .align 32
 .globl  ossl_extract_multiplier_2x20_win5_avx
-.type   ossl_extract_multiplier_2x20_win5_avx,\@abi-omnipotent
+.type   ossl_extract_multiplier_2x20_win5_avx,\@abi-omnipotent,,endbranch
 ossl_extract_multiplier_2x20_win5_avx:
 .cfi_startproc
     endbranch
